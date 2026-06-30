@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -260,19 +260,16 @@ nav{padding:16px 24px}
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:32px">
           <a href="#contact" class="btn-primary" style="font-size:14px;padding:12px 28px">Get in Touch</a>
           <a href="https://drive.google.com/uc?export=download&id=1jR6ocSz0X8Jr7X7xQSQhwQwLesCIrbm3" 
-   download="ruthish_resume.pdf" 
-   class="resume-btn" 
-   target="_blank" 
-   rel="noopener noreferrer">
-   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-     <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-     <polyline points="7 10 12 15 17 10"/>
-     <line x1="12" y1="15" x2="12" y2="3"/>
-   </svg>
-   Download Resume
-</a>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download Resume
+             download="ruthish_resume.pdf" 
+             class="resume-btn" 
+             target="_blank" 
+             rel="noopener noreferrer">
+             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+               <polyline points="7 10 12 15 17 10"/>
+               <line x1="12" y1="15" x2="12" y2="3"/>
+             </svg>
+             Download Resume
           </a>
         </div>
       </div>
@@ -627,38 +624,12 @@ document.querySelectorAll('.proj-card,.skill-cat,.tl-item,.edu-card,.cert-card')
 });
 
 /* ========== GOOGLE FORM SUBMISSION ========== */
-/*
-  HOW THIS WORKS:
-  Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
-  Google Forms accepts submissions via a hidden iframe POST.
-  The form posts to the /formResponse endpoint (not /viewform).
-  Field names follow the pattern: entry.XXXXXXXXXX
-  
-  TO FIND YOUR ENTRY IDs (one-time setup):
-  1. Open your Google Form in Chrome
-  2. Right-click Ã¢â€ â€™ Inspect Ã¢â€ â€™ Network tab
-  3. Fill a test submission and click Submit
-  4. Look for the "formResponse" request in Network tab
-  5. Check the Form Data payload you'll see entry.XXXXXX values
-  OR:
-  1. Open the form Ã¢â€ â€™ right-click the page Ã¢â€ â€™ View Page Source
-  2. Search for "entry." you'll find all field IDs
-  
-  CURRENT FORM FIELD MAPPING (update IDs after discovery):
-  Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
-  Google Form field: "Full Name"      Ã¢â€ â€™ entry ID below
-  Google Form field: "Email Address"  Ã¢â€ â€™ entry ID below
-  Google Form field: "Reason/Subject" Ã¢â€ â€™ entry ID below (text field mapped to dropdown)
-  Google Form field: "Your Message"   Ã¢â€ â€™ entry ID below
-  
-  UPDATE THESE 4 IDs with your real values:
-*/
 const GFORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdkO8k9-uZvD8zkkBM0n-7HDcnromVUxEasOwSJHwWxUzaIow/formResponse';
 const ENTRY = {
-  name:    'entry.NAME_ENTRY_ID',    // Ã¢â€ Â Replace with real entry ID e.g. entry.123456789
-  email:   'entry.EMAIL_ENTRY_ID',   // Ã¢â€ Â Replace with real entry ID
-  subject: 'entry.SUBJECT_ENTRY_ID', // Ã¢â€ Â Replace with real entry ID
-  message: 'entry.MESSAGE_ENTRY_ID'  // Ã¢â€ Â Replace with real entry ID
+  name:    'entry.NAME_ENTRY_ID',
+  email:   'entry.EMAIL_ENTRY_ID',
+  subject: 'entry.SUBJECT_ENTRY_ID',
+  message: 'entry.MESSAGE_ENTRY_ID'
 };
 
 function submitToGoogleForm(){
@@ -669,26 +640,21 @@ function submitToGoogleForm(){
   const errEl   = document.getElementById('form-error');
   const btn     = document.getElementById('submit-btn');
 
-  // Validation
   errEl.style.display='none';
   if(!name){showErr('Please enter your name.');return;}
   if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showErr('Please enter a valid email address.');return;}
   if(!subject){showErr('Please enter a subject.');return;}
   if(!message){showErr('Please enter your message.');return;}
 
-  // Loading state
   btn.classList.add('loading');
   btn.disabled=true;
 
-  // Build form data
   const params=new URLSearchParams();
   params.append(ENTRY.name, name);
   params.append(ENTRY.email, email);
   params.append(ENTRY.subject, subject);
   params.append(ENTRY.message, message);
 
-  // Create a hidden form that posts to Google Forms via iframe
-  // This avoids CORS the iframe absorbs the Google redirect
   const iframe = document.getElementById('gform-iframe');
   const tempForm = document.createElement('form');
   tempForm.method = 'POST';
@@ -703,7 +669,6 @@ function submitToGoogleForm(){
   }
   document.body.appendChild(tempForm);
 
-  // Listen for iframe load = Google Forms accepted the POST
   const onLoad=()=>{
     iframe.removeEventListener('load',onLoad);
     document.body.removeChild(tempForm);
@@ -713,12 +678,11 @@ function submitToGoogleForm(){
   };
   iframe.addEventListener('load',onLoad);
 
-  // Fallback timeout in case iframe fires early/strangely
   setTimeout(()=>{
     iframe.removeEventListener('load',onLoad);
     if(document.body.contains(tempForm))document.body.removeChild(tempForm);
     btn.classList.remove('loading');btn.disabled=false;
-    showSuccess(); // Assume success after 4s (Google Forms doesn't error loudly)
+    showSuccess();
   },4000);
 
   tempForm.submit();
@@ -732,7 +696,6 @@ function showErr(msg){
 function showSuccess(){
   document.getElementById('contact-form').style.display='none';
   document.getElementById('form-success').classList.add('show');
-  // Clear fields silently for when they click "Send Another"
   document.getElementById('cf-name').value='';
   document.getElementById('cf-email').value='';
   document.getElementById('cf-subject').value='';
