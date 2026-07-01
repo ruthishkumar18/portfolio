@@ -370,4 +370,3 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 *Designed & Built with ❤️ by Ruthishkumar G*
-```
