@@ -371,25 +371,3 @@ This project is open source and available under the [MIT License](LICENSE).
 
 *Designed & Built with ❤️ by Ruthishkumar G*
 ```
-
----
-
-## 📝 How to Add This README
-
-1. **Go to your repository:** `https://github.com/ruthishkumar18/portfolio`
-2. **Click "Add file"** → **"Create new file"**
-3. **Name the file:** `README.md`
-4. **Copy and paste** the content above
-5. **Scroll down** and click **"Commit new file"**
-
----
-
-## 🎨 Optional: Add Badges to Header
-
-Add this at the very top for a nicer badge header:
-
-```markdown
-[![Deploy to GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://ruthishkumar18.github.io/portfolio/)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
