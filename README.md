@@ -1,10 +1,3 @@
-# 📝 Complete README.md for Your Enhanced Portfolio
-
-Here's a professional README.md file that covers all the advanced features of your portfolio:
-
----
-
-```markdown
 # 🚀 Ruthishkumar G - AI & Full Stack Engineer Portfolio
 
 [![Website](https://img.shields.io/badge/Website-Live-blue?style=for-the-badge&logo=google-chrome)](https://ruthishkumar18.github.io/portfolio/)
@@ -400,8 +393,3 @@ Add this at the very top for a nicer badge header:
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-```
-
----
-
-Your README is now complete and professional! 🚀
