@@ -1,10 +1,8 @@
 import os
 import re
-import smtplib
 import html
 
-from email.message import EmailMessage
-from email.utils import formataddr
+import resend
 
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
@@ -42,15 +40,23 @@ CORS(
 
 
 # ---------------------------------------------------------
-# Gmail SMTP configuration
+# Resend email configuration
 # ---------------------------------------------------------
 
-SMTP_HOST = "smtp.gmail.com"
-SMTP_PORT = 465
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+RESEND_FROM_EMAIL = os.getenv(
+    "RESEND_FROM_EMAIL",
+    "onboarding@resend.dev"
+)
+RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL")
 
-MAIL_USERNAME = os.getenv("GMAIL_USERNAME")
-MAIL_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
-RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL", MAIL_USERNAME)
+
+# ---------------------------------------------------------
+# Configure Resend
+# ---------------------------------------------------------
+
+if RESEND_API_KEY:
+    resend.api_key = RESEND_API_KEY
 
 
 # ---------------------------------------------------------
@@ -129,14 +135,14 @@ def contact():
     # Check environment configuration
     # -----------------------------------------------------
 
-    if not MAIL_USERNAME or not MAIL_PASSWORD:
+    if not RESEND_API_KEY:
         app.logger.error(
-            "GMAIL_USERNAME or GMAIL_APP_PASSWORD is missing."
+            "RESEND_API_KEY is missing."
         )
 
         return jsonify({
             "success": False,
-            "message": "Mail server is not configured."
+            "message": "Mail service is not configured."
         }), 500
 
 
@@ -148,6 +154,17 @@ def contact():
         return jsonify({
             "success": False,
             "message": "Receiver email is not configured."
+        }), 500
+
+
+    if not RESEND_FROM_EMAIL:
+        app.logger.error(
+            "RESEND_FROM_EMAIL is missing."
+        )
+
+        return jsonify({
+            "success": False,
+            "message": "Sender email is not configured."
         }), 500
 
 
@@ -544,61 +561,23 @@ This message was sent from the portfolio contact form.
 
 
     # -----------------------------------------------------
-    # Create email
-    # -----------------------------------------------------
-
-    email = EmailMessage()
-
-    email["From"] = formataddr(
-        ("Portfolio Contact", MAIL_USERNAME)
-    )
-
-    email["To"] = RECEIVER_EMAIL
-
-    email["Subject"] = f"Portfolio Contact: {subject}"
-
-    email["Reply-To"] = sender_email
-
-
-    # Plain text version
-
-    email.set_content(
-        plain_text
-    )
-
-
-    # HTML version
-
-    email.add_alternative(
-        html_content,
-        subtype="html"
-    )
-
-
-    # -----------------------------------------------------
-    # Send email using Gmail SMTP SSL
+    # Send email using Resend HTTPS API
     # -----------------------------------------------------
 
     try:
 
-        with smtplib.SMTP_SSL(
-            SMTP_HOST,
-            SMTP_PORT,
-            timeout=30
-        ) as smtp:
-
-            smtp.login(
-                MAIL_USERNAME,
-                MAIL_PASSWORD
-            )
-
-            smtp.send_message(
-                email
-            )
-
+        email_response = resend.Emails.send({
+            "from": f"Portfolio Contact <{RESEND_FROM_EMAIL}>",
+            "to": [RECEIVER_EMAIL],
+            "subject": f"Portfolio Contact: {subject}",
+            "reply_to": sender_email,
+            "html": html_content,
+            "text": plain_text
+        })
 
         app.logger.info(
-            "Portfolio email sent successfully."
+            "Portfolio email sent successfully: %s",
+            email_response
         )
 
         return jsonify({
@@ -608,61 +587,13 @@ This message was sent from the portfolio contact form.
 
 
     # -----------------------------------------------------
-    # Gmail authentication error
-    # -----------------------------------------------------
-
-    except smtplib.SMTPAuthenticationError:
-
-        app.logger.exception(
-            "Gmail SMTP authentication failed."
-        )
-
-        return jsonify({
-            "success": False,
-            "message": "Mail authentication failed. Check the Gmail App Password."
-        }), 500
-
-
-    # -----------------------------------------------------
-    # SMTP error
-    # -----------------------------------------------------
-
-    except smtplib.SMTPException:
-
-        app.logger.exception(
-            "SMTP error while sending portfolio message."
-        )
-
-        return jsonify({
-            "success": False,
-            "message": "Unable to send the message right now."
-        }), 500
-
-
-    # -----------------------------------------------------
-    # Network / socket error
-    # -----------------------------------------------------
-
-    except OSError:
-
-        app.logger.exception(
-            "Network error while connecting to Gmail SMTP."
-        )
-
-        return jsonify({
-            "success": False,
-            "message": "Unable to connect to the mail server."
-        }), 500
-
-
-    # -----------------------------------------------------
-    # Unexpected error
+    # Resend / API error
     # -----------------------------------------------------
 
     except Exception:
 
         app.logger.exception(
-            "Unexpected error while sending portfolio message."
+            "Resend error while sending portfolio message."
         )
 
         return jsonify({
@@ -686,4 +617,3 @@ if __name__ == "__main__":
         port=port,
         debug=False
     )
-    
